@@ -1,0 +1,26 @@
+Option Explicit
+
+'Args
+'0 - Workbook full path to open
+'1 - Procedure to run
+'2 - Procedure Arg
+
+Dim workbookFullPath
+workbookFullPath = CStr(Wscript.Arguments(0))
+
+Dim taskName
+taskName = CStr(Wscript.Arguments(1))
+
+Dim taskArg
+taskArg = CStr(Wscript.Arguments(2))
+
+Dim oExcel1
+Set oExcel1 = CreateObject("Excel.Application")
+
+With oExcel1
+	.Visible = False
+	.ScreenUpdating = False
+	.Workbooks.Open cstr(workbookFullPath)
+	.Run cstr(taskName), cstr(taskArg)
+	.Quit: Set oExcel1 = Nothing
+End With
